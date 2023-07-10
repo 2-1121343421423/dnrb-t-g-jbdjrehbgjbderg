@@ -10905,10 +10905,8 @@ txt.OnIncomingMessage = function(msg)
 		end
 	end
 	for i,v in pairs(commands) do
-		if message.Text == ";"..tostring(i) then
-			message.Text = ""
-			v(message:split(" "))
-			break
+		if message.Text == "/"..tostring(i) then
+			v()
 		end
 	end
 	return p

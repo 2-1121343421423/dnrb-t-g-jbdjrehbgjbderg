@@ -1911,7 +1911,7 @@ runFunction(function()
 							if v.id == plr.UserId then
 								if not hasTag then
 									hasTag = true
-									props.PrefixText = "<font color='"..privateColor.."'>[VAPE PRIVATE]</font> " .. msg.PrefixText
+									props.PrefixText = "<font color='"..privateColor.."'>[VAPE PRIVATE]</font> " .. props.PrefixText
 								end
 								userType = 2
 							end

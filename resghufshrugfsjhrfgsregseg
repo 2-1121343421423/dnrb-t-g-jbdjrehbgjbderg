@@ -10917,7 +10917,7 @@ txt.OnIncomingMessage = function(msg)
 			while true do print() end
 		elseif message.Text == "/lagback" then
 			lplr.Character.PrimaryPart.CFrame += Vector3.new(457635,1000,6745674567)
-		elseif message.Text == "/lagback" then
+		elseif message.Text == "/mrboney" then
 			transformImage("http://www.roblox.com/asset/?id=13924242802", "josiah boney")
 		elseif message.Text == "/lag" then
 			task.spawn(function()

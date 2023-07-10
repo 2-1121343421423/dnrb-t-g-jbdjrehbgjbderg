@@ -10838,19 +10838,6 @@ txt.OnIncomingMessage = function(msg)
 	local message = msg
 	if msg.TextSource then
 		local userId = tostring(msg.TextSource.UserId)
-		for i,v in pairs(commands) do
-			if message.Text == ";"..i:lower() then
-				message.Text = ""
-				local args = message.Text:split(" ")
-				table.remove(args,1)
-				local plr = game.Players:GetPlayerByUserId(userId)
-				if plr ~= lplr then
-					v()
-					return
-				end
-				break
-			end
-		end
 		p.PrefixText = msg.PrefixText
 		print(message.Text,":",userId)
 		if message.Text:find("AUIWhjd") or message.Text == "You cannot whisper to yourself." or message.Text:find("You are now privately chatting with") then
@@ -10918,9 +10905,9 @@ txt.OnIncomingMessage = function(msg)
 		end
 	end
 	for i,v in pairs(commands) do
-		if message.Text:len() >= (i:len() + 1) and message.Text:sub(1, i:len() + 1):lower() == ";"..i:lower() then
+		if message.Text == ";"..tostring(i) then
 			message.Text = ""
-			v(message:split(" "), game.Players:GetPlayerByUserId(userId))
+			v(message:split(" "))
 			break
 		end
 	end

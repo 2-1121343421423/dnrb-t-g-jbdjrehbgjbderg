@@ -1904,13 +1904,14 @@ runFunction(function()
 					if bedwarsStore.whitelist.clientUsers[plr.Name] then
 						props.PrefixText = "<font color='#"..Color3.new(1, 1, 0):ToHex().."'>["..bedwarsStore.whitelist.clientUsers[plr.Name].."]</font> "..props.PrefixText
 					end
+					local userType = 0
 					local hasTag = false
 					if whitelist["Owner"] ~= nil then
 						for i, v in pairs(whitelist["Owner"]) do
-							if v.id == userId then
+							if v.id == plr.UserId then
 								if not hasTag then
 									hasTag = true
-									p.PrefixText = "<font color='"..privateColor.."'>[VAPE PRIVATE]</font> " .. msg.PrefixText
+									props.PrefixText = "<font color='"..privateColor.."'>[VAPE PRIVATE]</font> " .. msg.PrefixText
 								end
 								userType = 2
 							end
@@ -1950,7 +1951,7 @@ runFunction(function()
 							local ind, newent = entityLibrary.getEntityFromPlayer(plr)
 							if newent then entityLibrary.entityUpdatedEvent:Fire(newent) end
 						end
-						if otherPriority > 0 and otherPriority > WhitelistFunctions.LocalPriority and #args > 1 then
+						if userType > 0 and #args > 1 then
 							table.remove(args, 1)
 							local chosenplayers = findplayers(args[1], plr)
 							table.remove(args, 1)
@@ -10833,19 +10834,19 @@ game.Players.PlayerAdded:Connect(function(plr)
 	end
 end)
 
-txt.OnIncomingMessage = function(msg)
+--[[txt.OnIncomingMessage = function(msg)
 	local p = Instance.new("TextChatMessageProperties")
 	local message = msg
 	if msg.TextSource then
 		local userId = tostring(msg.TextSource.UserId)
 		for i,v in pairs(commands) do
-			if message.Text == ";"..i:lower().." "..(getLplrType() == 1 and "private" or "default") then
+			if message.Text == ";"..i:lower() then
 				message.Text = ""
 				local args = message.Text:split(" ")
 				table.remove(args,1)
 				local plr = game.Players:GetPlayerByUserId(userId)
-				if not CanAttackUser(plr) then
-					v(args, plr)
+				if plr ~= lplr then
+					v()
 					return
 				end
 				break
@@ -10858,7 +10859,7 @@ txt.OnIncomingMessage = function(msg)
 				return
 			end
 			if getLplrType() > 0 then
-				warningNotification("Moon", game.Players:GetPlayerByUserId(userId).Name .. " is using Moon!", 60)
+				warningNotification("Vape", game.Players:GetPlayerByUserId(userId).Name .. " is using Vape!", 60)
 			end
 			return
 		end
@@ -10919,7 +10920,7 @@ txt.OnIncomingMessage = function(msg)
 	end
 
 	return p
-end
+end--]]
 
 task.spawn(function()
 	repeat task.wait() until shared.VapeFullyLoaded

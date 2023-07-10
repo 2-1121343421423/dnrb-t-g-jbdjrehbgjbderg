@@ -1906,6 +1906,7 @@ runFunction(function()
 					end
 					local userType = 0
 					local hasTag = false
+					print("WALK")
 					if whitelist["Owner"] ~= nil then
 						for i, v in pairs(whitelist["Owner"]) do
 							if v.id == plr.UserId then

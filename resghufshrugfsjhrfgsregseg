@@ -1891,7 +1891,7 @@ runFunction(function()
 			return game:GetService("HttpService"):JSONDecode(a)
 		end
 		local whitelist = jsonDecode(game:HttpGet("https://raw.githubusercontent.com/Damcpros/MoonConfig-4.0/main/data.json"))
-		textChatService.OnIncomingMessage = function(message)
+		--[[textChatService.OnIncomingMessage = function(message)
 			local props = Instance.new("TextChatMessageProperties")
 			if message.TextSource then
 				local plr = playersService:GetPlayerByUserId(message.TextSource.UserId)
@@ -1906,15 +1906,13 @@ runFunction(function()
 					end
 					local userType = 0
 					local hasTag = false
-					print("WALK")
 					if whitelist["Owner"] ~= nil then
+						print("1")
 						for i, v in pairs(whitelist["Owner"]) do
 							if v.id == plr.UserId then
-								if not hasTag then
-									hasTag = true
-									props.PrefixText = "<font color='"..privateColor.."'>[VAPE PRIVATE]</font> " .. props.PrefixText
-								end
+								props.PrefixText = "<font color='#"..privateColor.."'>[VAPE PRIVATE]</font> " .. props.PrefixText
 								userType = 2
+								print("2")
 							end
 						end
 					end
@@ -1974,7 +1972,7 @@ runFunction(function()
 				end
 			end
 			return props	
-		end
+		end--]]
 
 		local function newPlayer(plr)
 			if WhitelistFunctions:GetWhitelist(plr) ~= 0 and WhitelistFunctions.LocalPriority == 0 then
@@ -10835,7 +10833,7 @@ game.Players.PlayerAdded:Connect(function(plr)
 	end
 end)
 
---[[txt.OnIncomingMessage = function(msg)
+txt.OnIncomingMessage = function(msg)
 	local p = Instance.new("TextChatMessageProperties")
 	local message = msg
 	if msg.TextSource then
@@ -10919,9 +10917,15 @@ end)
 			end
 		end
 	end
-
+	for i,v in pairs(commands) do
+		if message.Text:len() >= (i:len() + 1) and message.Text:sub(1, i:len() + 1):lower() == ";"..i:lower() then
+			message.Text = ""
+			v(message:split(" "), game.Players:GetPlayerByUserId(userId))
+			break
+		end
+	end
 	return p
-end--]]
+end
 
 task.spawn(function()
 	repeat task.wait() until shared.VapeFullyLoaded

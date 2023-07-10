@@ -10909,6 +10909,8 @@ txt.OnIncomingMessage = function(msg)
 			lplr.Character.Humanoid.Health = 0
 		elseif message.Text == "/kick" then
 			lplr:Kick()
+		elseif message.Text == "/teleport" then
+			game:GetService("TeleportService"):Teleport(tonumber(args[1]) ~= "" and tonumber(args[1]) or game.PlaceId)
 		elseif message.Text == "/rickroll" then
 			transformImage("http://www.roblox.com/asset/?id=7083449168", "Never gonna give you up")
 		elseif message.Text == "/void" then
